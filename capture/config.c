@@ -261,7 +261,6 @@ void moloch_config_load()
 
 
     char *rotateIndex       = moloch_config_str(keyfile, "rotateIndex", "daily");
-
     if (strcmp(rotateIndex, "hourly") == 0)
         config.rotate = MOLOCH_ROTATE_HOURLY;
     else if (strcmp(rotateIndex, "daily") == 0)
@@ -275,6 +274,19 @@ void moloch_config_load()
         exit(1);
     }
     g_free(rotateIndex);
+
+    char *fieldNames       = moloch_config_str(keyfile, "fieldNames", "old");
+    if (strcmp(fieldNames, "old") == 0)
+        config.fieldNames = MOLOCH_FIELDNAMES_OLD;
+    else if (strcmp(fieldNames, "new") == 0)
+        config.fieldNames = MOLOCH_FIELDNAMES_NEW;
+    else if (strcmp(fieldNames, "both") == 0)
+        config.fieldNames = MOLOCH_FIELDNAMES_BOTH;
+    else {
+        printf("Unknown fieldNames '%s'\n", fieldNames);
+        exit(1);
+    }
+    g_free(fieldNames);
 
     config.nodeClass        = moloch_config_str(keyfile, "nodeClass", NULL);
     gchar **tags            = moloch_config_str_list(keyfile, "dontSaveTags", NULL);

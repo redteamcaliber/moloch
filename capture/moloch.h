@@ -245,6 +245,7 @@ typedef struct {
  */
 enum MolochRotate { MOLOCH_ROTATE_HOURLY, MOLOCH_ROTATE_DAILY, MOLOCH_ROTATE_WEEKLY, MOLOCH_ROTATE_MONTHLY };
 enum MolochFilterType { MOLOCH_FILTER_DONT_SAVE, MOLOCH_FILTER_MIN_SAVE, MOLOCH_FILTER_MAX};
+enum MolochFieldNames { MOLOCH_FIELDNAMES_OLD=1, MOLOCH_FIELDNAMES_NEW, MOLOCH_FIELDNAMES_BOTH};
 
 typedef struct moloch_config {
     gboolean  quitting;
@@ -269,6 +270,7 @@ typedef struct moloch_config {
     gboolean  noLoadTags;
 
     enum MolochRotate rotate;
+    enum MolochFieldNames fieldNames;
 
     int       writeMethod;
 

@@ -42,7 +42,7 @@ use Data::Dumper;
 use POSIX;
 use strict;
 
-my $VERSION = 27;
+my $VERSION = 28;
 my $verbose = 0;
 my $PREFIX = "";
 my $SHARDS = -1;
@@ -971,7 +971,8 @@ sub sessionsUpdate
             }
           }
         }
-      }, {
+      },
+      {
         "template_georir": {
           "match_pattern": "regex",
           "path_match": ".*-(geo|rir|term)$",
@@ -982,16 +983,23 @@ sub sessionsUpdate
             "index": "not_analyzed"
           }
         }
-      }, {
+      },
+      {
+        "template_ip": {
+          "match_pattern": "regex",
+          "path_match": "^ip(Src|Dst)$",
+          "mapping": {
+            "type": "ip"
+          }
+        }
+      },
+      {
         "template_string": {
           "match_mapping_type": "string",
           "mapping": {
-            "type": "multi_field",
-            "path": "full",
-            "fields": {
-              "snow" : {"type": "string", "analyzer" : "snowball"},
-              "raw" : {"type": "string", "index" : "not_analyzed"}
-            }
+            "omit_norms": true,
+            "type": "string",
+            "index": "not_analyzed"
           }
         }
       }
