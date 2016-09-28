@@ -1,0 +1,11 @@
+FROM ubuntu:xenial
+MAINTAINER Andy Wick <andy.wick@teamaol.com>
+
+ARG VERSION
+ARG ITERATION
+COPY builds/ubuntu-16/moloch_${VERSION}-${ITERATION}_amd64.deb /tmp
+RUN dpkg -i /tmp/moloch_${VERSION}-${ITERATION}_amd64.deb
+
+EXPOSE 8005
+WORKDIR /data/moloch/viewer
+CMD ["/data/moloch/bin/node", "viewer.js"]
