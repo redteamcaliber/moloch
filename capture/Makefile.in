@@ -70,4 +70,4 @@ installdirs:
 	(cd plugins; $(MAKE) install)
 
 distclean realclean clean:
-	rm -f *.o moloch-capture
+	rm -f *.o moloch-capture thirdparty/*.o
