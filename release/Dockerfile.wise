@@ -1,9 +1,5 @@
-FROM ubuntu:xenial
+FROM ubuntu:16.04
 MAINTAINER Andy Wick <andy.wick@teamaol.com>
-
-#RUN apt-get update ; apt-get install -y wget curl lsb-release
-#RUN wget -N http://apt-stable.ntop.org/14.04/all/apt-ntop-stable.deb ; dpkg --install apt-ntop-stable.deb
-#RUN apt-get update; apt-get install -y pfring
 
 ARG VERSION
 ARG ITERATION
