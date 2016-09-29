@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 # If running in release dir change to parent
 if [ -f Dockerfile.centos-7 ]; then
     cd ..
