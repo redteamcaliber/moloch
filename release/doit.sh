@@ -1,7 +1,4 @@
 #!/bin/zsh
-#dockers=(centos-7 centos-6 ubuntu-14 ubuntu-16 docker-capture docker-viewer docker-wise)
-dockers=(centos-7 centos-6 ubuntu-14 ubuntu-16)
-
 # If running in release dir change to parent
 if [ -f Dockerfile.centos-7 ]; then
     cd ..
@@ -22,7 +19,7 @@ docker build -t moloch-ubuntu-14 --pull --file=release/Dockerfile.ubuntu-14 --bu
 docker build -t moloch-ubuntu-16 --pull --file=release/Dockerfile.ubuntu-16 --build-arg ITERATION=$ITERATION --build-arg VERSION=$VERSION_UBUNTU .
 
 # Actually copy result of build
-for i (centos-7 centos-6 ubuntu-14 ubuntu-16); do                                                                                                                                                                               ~/moloch.github
+for i in centos-7 centos-6 ubuntu-14 ubuntu-16; do
   docker run --rm -v ${PWD}/builds/${i}:/output:rw -u $(id -u) moloch-$i bash -c "cp -r /moloch[_-]* /output/"
 done
 
