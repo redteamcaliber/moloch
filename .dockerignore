@@ -17,5 +17,5 @@ ipv4-address-space.csv
 autom4te.cache
 moloch-capture
 stamp-h1
-release
+release/Dockerfile*
 
