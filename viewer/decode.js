@@ -511,11 +511,16 @@ ItemHTTPStream.onMessageComplete = function() {
   delete this.curitem;
 };
 
-ItemHTTPStream.onHeadersComplete = function(info) {
+ItemHTTPStream.onHeadersComplete = function(info, ignore, headers) {
   //console.log("onHeadersComplete", this.bufferStream?"bufferStream":"no bufferStream");
+  if (headers === undefined) {
+    headers = info.headers;
+  }
+  info = {};
+
   info.headersMap = {};
-  for (var i = 0; i < info.headers.length; i += 2) {
-    info.headersMap[info.headers[i].toLowerCase()] = info.headers[i+1];
+  for (var i = 0; i < headers.length; i += 2) {
+    info.headersMap[headers[i].toLowerCase()] = headers[i+1];
   }
   this.headerInfo = info;
 };
@@ -533,9 +538,15 @@ ItemHTTPStream.prototype._process = function (item, callback) {
       this.parsers = [new HTTPParser(HTTPParser.REQUEST), new HTTPParser(HTTPParser.RESPONSE)];
     }
     this.parsers[0].httpstream = this.parsers[1].httpstream = this;
-    this.parsers[0].onBody = this.parsers[1].onBody = ItemHTTPStream.onBody;
-    this.parsers[0].onMessageComplete = this.parsers[1].onMessageComplete = ItemHTTPStream.onMessageComplete;
-    this.parsers[0].onHeadersComplete = this.parsers[1].onHeadersComplete = ItemHTTPStream.onHeadersComplete;
+    if (HTTPParser.kOnBody === undefined) {
+      this.parsers[0].onBody = this.parsers[1].onBody = ItemHTTPStream.onBody;
+      this.parsers[0].onMessageComplete = this.parsers[1].onMessageComplete = ItemHTTPStream.onMessageComplete;
+      this.parsers[0].onHeadersComplete = this.parsers[1].onHeadersComplete = ItemHTTPStream.onHeadersComplete;
+    } else {
+      this.parsers[0][HTTPParser.kOnBody] = this.parsers[1][HTTPParser.kOnBody] = ItemHTTPStream.onBody;
+      this.parsers[0][HTTPParser.kOnMessageComplete] = this.parsers[1][HTTPParser.kOnMessageComplete] = ItemHTTPStream.onMessageComplete;
+      this.parsers[0][HTTPParser.kOnHeadersComplete] = this.parsers[1][HTTPParser.kOnHeadersComplete] = ItemHTTPStream.onHeadersComplete;
+    }
   }
 
   if (item.data.length === 0) {
@@ -799,7 +810,7 @@ if(require.main === module) {
   };
 
   var base = "ITEM-NATURAL";
-  var data;
+  var filename;
   var ending = ["ITEM-SORTER", "ITEM-PRINTER"];
   for (var aa = 2; aa < process.argv.length; aa++) {
     if (process.argv[aa] === "--hex") {
@@ -831,14 +842,51 @@ if(require.main === module) {
       options["ITEM-RAWBODY"] = {bodyNumber: +process.argv[aa]};
       base = "ITEM-RAWBODY";
     } else {
-      data   = require("./" + process.argv[aa]);
+      filename = process.argv[aa];
     }
   }
+
 
   options.order.push("ITEM-HTTP");
   options.order.push("ITEM-SMTP");
 
   options.order = options.order.concat("ITEM-BYTES", base, ending);
   console.log(options);
-  exports.createPipeline(options, options.order, new Pcap2ItemStream(options, data));
+
+  if (!filename) {
+    console.log("ERROR, must provide a file");
+  } else if (filename.match(/\.pcap$/)) {
+    var Pcap = require('./pcap.js');
+    var fs = require('fs');
+    var pcap = new Pcap(filename);
+    pcap.open(filename);
+    var stat = fs.statSync(filename);
+    var pos = 24;
+    var packets = [];
+
+    async.whilst(
+        function () { return pos < stat.size;},
+        function (callback) {
+          pcap.readPacket(pos, function(packet) {
+            var obj = {};
+            pcap.decode(packet, obj);
+            packets.push(obj);
+            pos += packet.length;
+            callback();
+          });
+        },
+        function (err, n) {
+          Pcap.reassemble_tcp(packets, packets[0].ip.addr1 + ':' + packets[0].tcp.sport, function(err, results) {
+            exports.createPipeline(options, options.order, new Pcap2ItemStream(options, results));
+          });
+        }
+    );
+
+    console.log("process", filename);
+  } else {
+    var data   = require("./" + filename);
+    exports.createPipeline(options, options.order, new Pcap2ItemStream(options, data));
+  }
+
+
 }

@@ -2,13 +2,13 @@
 /* moloch.h -- General Moloch include file
  *
  * Copyright 2012-2016 AOL Inc. All rights reserved.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this Software except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -156,9 +156,9 @@ typedef HASH_VAR(s_, MolochCertsInfoHashStd_t, MolochCertsInfoHead_t, 5);
 #define MOLOCH_FIELD_FLAG_FORCE_UTF8         0x0004
 /* Don't create in fields db table */
 #define MOLOCH_FIELD_FLAG_NODB               0x0008
-/* Don't create in capture list */ 
+/* Don't create in capture list */
 #define MOLOCH_FIELD_FLAG_FAKE               0x0010
-/* Don't create in capture list */ 
+/* Don't create in capture list */
 #define MOLOCH_FIELD_FLAG_DISABLED           0x0020
 
 /* These are ones you shouldn't set, for old cruf before we were smarter */
@@ -380,6 +380,7 @@ typedef struct molochpacket_t
     uint64_t       readerFilePos;  // where in input file
     char          *readerName;     // file name reader used
     uint32_t       writerFileNum;  // file number in db
+    uint32_t       hash;           // Saved hash
     uint16_t       pktlen;         // length of packet
     uint16_t       payloadLen;     // length of ip payload
     uint16_t       payloadOffset;  // offset to ip payload from start
@@ -419,6 +420,17 @@ typedef struct {
 #define MOLOCH_TCP_STATE_FIN     1
 #define MOLOCH_TCP_STATE_FIN_ACK 2
 
+/******************************************************************************/
+typedef enum {
+    MOLOCH_TCPFLAG_SYN = 0,
+    MOLOCH_TCPFLAG_SYN_ACK,
+    MOLOCH_TCPFLAG_ACK,
+    MOLOCH_TCPFLAG_PSH,
+    MOLOCH_TCPFLAG_FIN,
+    MOLOCH_TCPFLAG_RST,
+    MOLOCH_TCPFLAG_URG,
+    MOLOCH_TCPFLAG_MAX
+} MolochSesTcpFlags;
 /******************************************************************************/
 /*
  * SPI Data Storage
@@ -468,6 +480,7 @@ typedef struct moloch_session {
     uint16_t               outstandingQueries;
     uint16_t               segments;
     uint16_t               stopSaving;
+    uint16_t               tcpFlagCnt[MOLOCH_TCPFLAG_MAX];
 
     uint8_t                consumed[2];
     uint8_t                protocol;
@@ -728,7 +741,7 @@ uint32_t moloch_session_hash(const void *key);
 int      moloch_session_cmp(const void *keyv, const void *elementv);
 
 MolochSession_t *moloch_session_find(int ses, char *sessionId);
-MolochSession_t *moloch_session_find_or_create(int ses, char *sessionId, int *isNew);
+MolochSession_t *moloch_session_find_or_create(int ses, uint32_t hash, char *sessionId, int *isNew);
 
 void     moloch_session_init();
 void     moloch_session_exit();
@@ -758,7 +771,7 @@ int      moloch_session_need_save_outstanding();
 int      moloch_session_thread_outstanding(int thread);
 int      moloch_session_cmd_outstanding();
 
-typedef enum { 
+typedef enum {
     MOLOCH_SES_CMD_ADD_TAG,
     MOLOCH_SES_CMD_FUNC
 } MolochSesCmd;
