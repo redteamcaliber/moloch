@@ -3,9 +3,9 @@ MAINTAINER Andy Wick <andy.wick@teamaol.com>
 
 ARG VERSION
 ARG ITERATION
-COPY builds/ubuntu-16/moloch_${VERSION}-${ITERATION}_amd64.deb /tmp
-RUN dpkg -i /tmp/moloch_${VERSION}-${ITERATION}_amd64.deb
+COPY builds/ubuntu-16/${NAME}_${VERSION}-${ITERATION}_amd64.deb /tmp
+RUN dpkg -i /tmp/${NAME}_${VERSION}-${ITERATION}_amd64.deb
 
 EXPOSE 8081
-WORKDIR /data/moloch/wiseService
-CMD ["/data/moloch/bin/node", "wiseService.js"]
+WORKDIR /data/${NAME}/wiseService
+CMD ["/data/${NAME}/bin/node", "wiseService.js"]

@@ -24,13 +24,13 @@ wget -N https://www.snort.org/downloads/snort/daq-${daq_version}.tar.gz
 wget -N https://www.lua.org/ftp/lua-${lua_version}.tar.gz
 
 # dir setup
-mkdir /data /data/moloch /data/moloch/etc /data/moloch/bin /data/moloch/logs /data/moloch/raw 
-chown nobody /data/moloch /data/moloch/etc /data/moloch/bin /data/moloch/logs /data/moloch/raw
-chmod og-rwx /data/moloch/raw
+mkdir /data /data/$NAME /data/$NAME/etc /data/$NAME/bin /data/$NAME/logs /data/$NAME/raw 
+chown nobody /data/$NAME /data/$NAME/etc /data/$NAME/bin /data/$NAME/logs /data/$NAME/raw
+chmod og-rwx /data/$NAME/raw
 
 # node
-(cd /data/moloch ; xzcat /tmp/node-v${node_version}-linux-x64.tar.xz | tar xf -)
-ln -sf /data/moloch/node-v${node_version}-linux-x64/bin/n* /data/moloch/bin
+(cd /data/$NAME ; xzcat /tmp/node-v${node_version}-linux-x64.tar.xz | tar xf -)
+ln -sf /data/$NAME/node-v${node_version}-linux-x64/bin/n* /data/$NAME/bin
 
 # yara
 tar zxf yara-${yara_version}.tar.gz

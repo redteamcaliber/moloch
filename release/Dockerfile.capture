@@ -7,8 +7,8 @@ RUN apt-get update; apt-get install -y pfring
 
 ARG VERSION
 ARG ITERATION
-COPY builds/ubuntu-16/moloch_${VERSION}-${ITERATION}_amd64.deb /tmp
-RUN dpkg -i /tmp/moloch_${VERSION}-${ITERATION}_amd64.deb
+COPY builds/ubuntu-16/${NAME}_${VERSION}-${ITERATION}_amd64.deb /tmp
+RUN dpkg -i /tmp/${NAME}_${VERSION}-${ITERATION}_amd64.deb
 
-WORKDIR /data/moloch
-CMD ["/data/moloch/bin/moloch-capture"]
+WORKDIR /data/$NAME
+CMD ["/data/$NAME/bin/moloch-capture"]

@@ -5,9 +5,10 @@ if [ -f Dockerfile.centos-7 ]; then
 fi
 
 # Get version info
-ITERATION=1
-VERSION_CENTOS=`grep "AC_INIT(" configure.ac | sed 's/.*, \[\(.*\)\].*$/\1/' | tr "-" "_"`
-VERSION_UBUNTU=`grep "AC_INIT(" configure.ac | sed 's/.*, \[\(.*\)\].*$/\1/'`
+export NAME=${NAME:-moloch}
+export ITERATION=${ITERATION:-1}
+export VERSION_CENTOS=${VERSION_CENTOS:-`grep "AC_INIT(" configure.ac | sed 's/.*, \[\(.*\)\].*$/\1/' | tr "-" "_"`}
+export VERSION_UBUNTU=${VERSION_UBUNTU:-`grep "AC_INIT(" configure.ac | sed 's/.*, \[\(.*\)\].*$/\1/'`}
 
 # Make build dirs if not already there
 mkdir builds builds/centos-6 builds/centos-7 builds/ubuntu-14 builds/ubuntu-16
