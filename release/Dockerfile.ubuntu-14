@@ -1,7 +1,7 @@
 FROM alanfranz/fwd-ubuntu-trusty:latest
 MAINTAINER Andy Wick <andy.wick@teamaol.com>
 
-RUN apt-get update ; apt-get install -y git wget curl libpcre3-dev uuid-dev libmagic-dev pkg-config gcc g++ flex bison zlib1g-dev libffi-dev gettext make libjson-perl libbz2-dev libwww-perl libpng-dev xz-utils libffi-dev libssl-dev python-minimal
+RUN apt-get update ; apt-get install -y git wget curl libpcre3-dev uuid-dev libmagic-dev pkg-config gcc g++ flex bison zlib1g-dev libffi-dev gettext make libjson-perl libbz2-dev libwww-perl libpng-dev xz-utils libffi-dev libssl-dev python-minimal libreadline6-dev
 RUN wget -N http://apt-stable.ntop.org/14.04/all/apt-ntop-stable.deb ; dpkg --install apt-ntop-stable.deb
 RUN apt-get update; apt-get install -y pfring
 

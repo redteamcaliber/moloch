@@ -5,8 +5,7 @@ RUN yum clean all
 RUN yum -y install wget
 RUN wget -O /etc/yum.repos.d/ntop.repo http://packages.ntop.org/centos-stable/ntop.repo
 RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-RUN yum -y install git curl pcre pcre-devel pkgconfig flex bison gcc gcc-c++ zlib-devel e2fsprogs-devel openssl-devel file-devel make gettext libuuid-devel perl-JSON bzip2-libs bzip2-devel perl-libwww-perl libpng-devel xz libffi-devel libselinux-python rpm-build pfring
-
+RUN yum -y install git curl pcre pcre-devel pkgconfig flex bison gcc gcc-c++ zlib-devel e2fsprogs-devel openssl-devel file-devel make gettext libuuid-devel perl-JSON bzip2-libs bzip2-devel perl-libwww-perl libpng-devel xz libffi-devel libselinux-python rpm-build pfring readline-devel
 COPY release/thirdparty.sh /tmp/
 RUN sh -c /tmp/thirdparty.sh
 

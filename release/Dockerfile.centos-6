@@ -1,17 +1,19 @@
 FROM alanfranz/fwd-centos-6:latest
 MAINTAINER Andy Wick <andy.wick@teamaol.com>
 
-RUN yum clean all
-RUN yum -y install wget
+RUN yum -y install wget centos-release-scl
 RUN wget -O /etc/yum.repos.d/ntop.repo http://packages.ntop.org/centos-stable/ntop.repo
+RUN yum clean all
 RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
-RUN yum -y install git curl pcre pcre-devel pkgconfig flex bison gcc gcc-c++ zlib-devel e2fsprogs-devel openssl-devel file-devel make gettext libuuid-devel perl-JSON bzip2-libs bzip2-devel perl-libwww-perl libpng-devel xz libffi-devel libselinux-python rpm-build pfring
+RUN yum -y install git curl pcre pcre-devel pkgconfig flex bison gcc gcc-c++ zlib-devel e2fsprogs-devel openssl-devel file-devel make gettext libuuid-devel perl-JSON bzip2-libs bzip2-devel perl-libwww-perl libpng-devel xz libffi-devel libselinux-python rpm-build readline-devel pfring
+RUN yum -y upgrade
+RUN yum -y install  devtoolset-3-toolchain
 
 COPY release/thirdparty.sh /tmp/
 RUN sh -c /tmp/thirdparty.sh
 
 COPY . /tmp/moloch
-RUN sh -c /tmp/moloch/release/build.sh
+RUN scl enable devtoolset-3 /tmp/moloch/release/build.sh
 
 ARG ITERATION
 ARG VERSION
