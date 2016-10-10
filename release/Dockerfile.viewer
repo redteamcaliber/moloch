@@ -1,6 +1,7 @@
 FROM ubuntu:16.04
 MAINTAINER Andy Wick <andy.wick@teamaol.com>
 
+ARG NAME
 ARG VERSION
 ARG ITERATION
 COPY builds/ubuntu-16/${NAME}_${VERSION}-${ITERATION}_amd64.deb /tmp

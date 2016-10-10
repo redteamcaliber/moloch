@@ -12,10 +12,10 @@ RUN yum -y install  devtoolset-3-toolchain
 COPY release/thirdparty.sh /tmp/
 RUN sh -c /tmp/thirdparty.sh
 
+ARG NAME
 COPY . /tmp/$NAME
 RUN scl enable devtoolset-3 /tmp/$NAME/release/build.sh
 
-ARG NAME
 ARG ITERATION
 ARG VERSION
 RUN fpm -s dir -t rpm -n $NAME -v $VERSION --iteration $ITERATION /data/$NAME
