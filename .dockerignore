@@ -18,4 +18,4 @@ autom4te.cache
 moloch-capture
 stamp-h1
 release/Dockerfile*
-
+release/download.sh

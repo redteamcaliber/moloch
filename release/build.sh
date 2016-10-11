@@ -1,15 +1,19 @@
 #!/bin/sh
-yara_version=1.7
-geoip_version=1.6.0
-pcap_version=1.7.4
-curl_version=7.50.3
-glib2_dir=2.48
-glib2_version=2.48.2
-node_version=0.10.46
-daq_version=2.0.6
-lua_version=5.3.3
+. /tmp/$NAME/release/versions.sh
+
+# dir setup
+mkdir /data /data/$NAME /data/$NAME/etc /data/$NAME/bin /data/$NAME/logs /data/$NAME/raw 
+chown nobody /data/$NAME /data/$NAME/etc /data/$NAME/bin /data/$NAME/logs /data/$NAME/raw
+chmod og-rwx /data/$NAME/raw
+
+# node
+(cd /tmp ; wget -N https://nodejs.org/download/release/v${node_version}/node-v${node_version}-linux-x64.tar.xz)
+(cd /data/$NAME ; xzcat /tmp/node-v${node_version}-linux-x64.tar.xz | tar xvf -)
+ln -sf /data/$NAME/node-v${node_version}-linux-x64/bin/npm /data/$NAME/bin
+ln -sf /data/$NAME/node-v${node_version}-linux-x64/bin/node /data/$NAME/bin
 
 export PATH=/data/$NAME/bin:$PATH
+
 cd /tmp/$NAME
 ./configure --with-libpcap=../libpcap-${pcap_version} --with-yara=../yara-${yara_version} --with-GeoIP=../GeoIP-${geoip_version} --with-curl=../curl-${curl_version} --with-glib2=../glib-${glib2_version} --with-lua=../lua-${lua_version}
 make clean

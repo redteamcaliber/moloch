@@ -1,36 +1,8 @@
 #!/bin/sh
-yara_version=1.7
-geoip_version=1.6.0
-pcap_version=1.7.4
-curl_version=7.50.3
-glib2_dir=2.48
-glib2_version=2.48.2
-node_version=4.6.0
-daq_version=2.0.6
-lua_version=5.3.3
+. /tmp/versions.sh
 
 cd /tmp
 builddir=`pwd`
-echo "BUILDIR=$builddir"
-
-# Downloads
-wget -N https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/yara-project/yara-${yara_version}.tar.gz
-wget -N http://www.maxmind.com/download/geoip/api/c/GeoIP-${geoip_version}.tar.gz
-wget -N http://www.tcpdump.org/release/libpcap-${pcap_version}.tar.gz
-wget -N http://curl.haxx.se/download/curl-${curl_version}.tar.gz
-wget -N http://ftp.gnome.org/pub/gnome/sources/glib/${glib2_dir}/glib-${glib2_version}.tar.xz
-wget -N https://nodejs.org/download/release/v${node_version}/node-v${node_version}-linux-x64.tar.xz
-wget -N https://www.snort.org/downloads/snort/daq-${daq_version}.tar.gz
-wget -N https://www.lua.org/ftp/lua-${lua_version}.tar.gz
-
-# dir setup
-mkdir /data /data/$NAME /data/$NAME/etc /data/$NAME/bin /data/$NAME/logs /data/$NAME/raw 
-chown nobody /data/$NAME /data/$NAME/etc /data/$NAME/bin /data/$NAME/logs /data/$NAME/raw
-chmod og-rwx /data/$NAME/raw
-
-# node
-(cd /data/$NAME ; xzcat /tmp/node-v${node_version}-linux-x64.tar.xz | tar xf -)
-ln -sf /data/$NAME/node-v${node_version}-linux-x64/bin/n* /data/$NAME/bin
 
 # yara
 tar zxf yara-${yara_version}.tar.gz
