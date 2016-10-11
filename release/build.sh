@@ -8,7 +8,7 @@ chmod og-rwx /data/$NAME/raw
 
 # node
 (cd /tmp ; wget -N https://nodejs.org/download/release/v${node_version}/node-v${node_version}-linux-x64.tar.xz)
-(cd /data/$NAME ; xzcat /tmp/node-v${node_version}-linux-x64.tar.xz | tar xvf -)
+(cd /data/$NAME ; xzcat /tmp/node-v${node_version}-linux-x64.tar.xz | tar xf -)
 ln -sf /data/$NAME/node-v${node_version}-linux-x64/bin/npm /data/$NAME/bin
 ln -sf /data/$NAME/node-v${node_version}-linux-x64/bin/node /data/$NAME/bin
 
