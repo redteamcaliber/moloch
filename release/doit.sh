@@ -14,13 +14,14 @@ export VERSION_CENTOS=${VERSION_CENTOS:-`grep "AC_INIT(" configure.ac | sed 's/.
 export VERSION_UBUNTU=${VERSION_UBUNTU:-`grep "AC_INIT(" configure.ac | sed 's/.*, \[\(.*\)\].*$/\1/'`}
 
 # Make build dirs if not already there
-mkdir builds builds/centos-6 builds/centos-7 builds/ubuntu-14 builds/ubuntu-16
+mkdir -p builds builds/centos-6 builds/centos-7 builds/ubuntu-14 builds/ubuntu-16
 
 # Build images
-docker build -t moloch-centos-6 --pull --file=release/Dockerfile.centos-6 --build-arg ITERATION=$ITERATION --build-arg VERSION=$VERSION_CENTOS --build-arg NAME=$NAME .
-docker build -t moloch-centos-7 --pull --file=release/Dockerfile.centos-7 --build-arg ITERATION=$ITERATION --build-arg VERSION=$VERSION_CENTOS --build-arg NAME=$NAME .
-docker build -t moloch-ubuntu-14 --pull --file=release/Dockerfile.ubuntu-14 --build-arg ITERATION=$ITERATION --build-arg VERSION=$VERSION_UBUNTU --build-arg NAME=$NAME .
-docker build -t moloch-ubuntu-16 --pull --file=release/Dockerfile.ubuntu-16 --build-arg ITERATION=$ITERATION --build-arg VERSION=$VERSION_UBUNTU --build-arg NAME=$NAME .
+docker build -t moloch-centos-6 --pull --file=release/Dockerfile.centos-6 --build-arg ITERATION=$ITERATION --build-arg VERSION=$VERSION_CENTOS --build-arg NAME=$NAME . &
+docker build -t moloch-centos-7 --pull --file=release/Dockerfile.centos-7 --build-arg ITERATION=$ITERATION --build-arg VERSION=$VERSION_CENTOS --build-arg NAME=$NAME . &
+docker build -t moloch-ubuntu-14 --pull --file=release/Dockerfile.ubuntu-14 --build-arg ITERATION=$ITERATION --build-arg VERSION=$VERSION_UBUNTU --build-arg NAME=$NAME . &
+docker build -t moloch-ubuntu-16 --pull --file=release/Dockerfile.ubuntu-16 --build-arg ITERATION=$ITERATION --build-arg VERSION=$VERSION_UBUNTU --build-arg NAME=$NAME . &
+wait
 
 # Actually copy result of build
 for i in centos-7 centos-6 ubuntu-14 ubuntu-16; do
@@ -28,9 +29,8 @@ for i in centos-7 centos-6 ubuntu-14 ubuntu-16; do
 done
 
 # Build docker containers
-docker build -t moloch-capture --pull --file=release/Dockerfile.capture --build-arg ITERATION=$ITERATION --build-arg VERSION=$VERSION_UBUNTU --build-arg NAME=$NAME .
-docker build -t moloch-viewer --pull --file=release/Dockerfile.viewer --build-arg ITERATION=$ITERATION --build-arg VERSION=$VERSION_UBUNTU --build-arg NAME=$NAME .
-docker build -t moloch-wise --pull --file=release/Dockerfile.wise --build-arg ITERATION=$ITERATION --build-arg VERSION=$VERSION_UBUNTU --build-arg NAME=$NAME .
-
+docker build -t moloch-capture --pull --file=release/Dockerfile.capture --build-arg ITERATION=$ITERATION --build-arg VERSION=$VERSION_UBUNTU --build-arg NAME=$NAME . &
+docker build -t moloch-viewer --pull --file=release/Dockerfile.viewer --build-arg ITERATION=$ITERATION --build-arg VERSION=$VERSION_UBUNTU --build-arg NAME=$NAME . &
+docker build -t moloch-wise --pull --file=release/Dockerfile.wise --build-arg ITERATION=$ITERATION --build-arg VERSION=$VERSION_UBUNTU --build-arg NAME=$NAME . &
 
 wait
