@@ -26,6 +26,7 @@
     $onInit() {
       this.viewName = '';
       this.loading  = false;
+      this.public   = false;
 
       if (!this.expression) { this.expression = ''; }
     }
@@ -51,7 +52,8 @@
 
       let data = {
         viewName  : this.viewName,
-        expression: this.expression
+        expression: this.expression,
+        public    : this.public
       };
 
       this.UserService.createView(data)
@@ -79,6 +81,14 @@
 
     cancel() { // close the form
       this.$scope.$emit('close:form:container');
+    }
+    /**
+     * Fired when change bounded checkbox is (un)checked
+     */
+    changePublic() {
+      this.public = !this.public;
+
+      this.change();
     }
 
   }

@@ -4104,6 +4104,8 @@ app.post('/views/create', checkCookieToken, function(req, res) {
       container[req.body.viewName] = {expression: req.body.expression};
     }
 
+    container[req.body.viewName].public = req.body.public || false;
+
     Db.setUser(user.userId, user, function(err, info) {
       if (err) {
         console.log("Create view error", err, info);
