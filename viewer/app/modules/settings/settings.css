@@ -44,7 +44,7 @@ moloch-settings .navbar-inverse {
 }
 moloch-settings .navbar-inverse li.active a {
   font-weight : 500;
-  height      : 40px;
+  height      : 38px;
 }
 moloch-settings .navbar-inverse .navbar-brand {
   height      : 30px;
@@ -327,20 +327,20 @@ moloch-settings .dark-2-theme .dropdown-menu {
 }
 
 moloch-settings .dark-2-theme session-field .field:hover {
-  z-index: 4;
+  z-index         : 4;
   background-color: #333333;
-  border: 1px solid #555555;
+  border          : 1px solid #555555;
 }
 moloch-settings .dark-2-theme session-field ul.session-field-dropdown {
   background-color: #333333;
-  border: 1px solid #555555;
+  border          : 1px solid #555555;
 }
 moloch-settings .dark-2-theme session-field ul.session-field-dropdown div > li > a {
   color: #C7C7C7;
 }
 moloch-settings .dark-2-theme session-field ul.session-field-dropdown div > li > a:hover {
-  text-decoration: none;
-  color: #EEEEEE;
+  text-decoration : none;
+  color           : #EEEEEE;
   background-color: #444444;
 }
 
@@ -403,19 +403,106 @@ moloch-settings .dark-3-theme .dropdown-menu {
 }
 
 moloch-settings .dark-3-theme session-field .field:hover {
-  z-index: 4;
+  z-index         : 4;
   background-color: #333333;
-  border: 1px solid #555555;
+  border          : 1px solid #555555;
 }
 moloch-settings .dark-3-theme session-field ul.session-field-dropdown {
   background-color: #333333;
-  border: 1px solid #555555;
+  border          : 1px solid #555555;
 }
 moloch-settings .dark-3-theme session-field ul.session-field-dropdown div > li > a {
   color: #ADC1C3;
 }
 moloch-settings .dark-3-theme session-field ul.session-field-dropdown div > li > a:hover {
-  text-decoration: none;
-  color: #EEEEEE;
+  text-decoration : none;
+  color           : #EEEEEE;
   background-color: #444444;
+}
+
+/* Custom */
+moloch-settings .custom-theme .navbar {
+  background-color: var(--color-primary-dark);
+  border-color    : var(--color-primary-darker);
+}
+
+moloch-settings .custom-theme .navbar-inverse li.active a {
+  color           : #FFFFFF;
+  background-color: var(--color-primary-darker) !important;
+}
+
+moloch-settings .custom-theme .display-sub-navbar {
+  background-color: var(--color-secondary-lightest);
+}
+moloch-settings .custom-theme .display-sub-navbar ul.dropdown-menu li.active a {
+  background-color: var(--color-primary);
+}
+
+moloch-settings .custom-theme .display-sub-sub-navbar {
+  background-color: var(--color-quaternary-lightest);
+}
+moloch-settings .custom-theme .display-sub-sub-navbar session-field .field a.value {
+  color: var(--color-foreground-accent);
+}
+
+moloch-settings .custom-theme .display-sub-navbar .btn-theme-primary-display {
+  color           : #FFFFFF;
+  background-color: var(--color-primary);
+  border-color    : var(--color-primary-dark);
+}
+moloch-settings .custom-theme .display-sub-navbar .btn-theme-secondary-display {
+  color           : #FFFFFF;
+  background-color: var(--color-secondary);
+  border-color    : var(--color-secondary-dark);
+}
+moloch-settings .custom-theme .display-sub-navbar .btn-theme-tertiary-display {
+  color           : #FFFFFF;
+  background-color: var(--color-tertiary);
+  border-color    : var(--color-tertiary-dark);
+}
+moloch-settings .custom-theme .display-sub-navbar .btn-theme-quaternary-display {
+  color           : #FFFFFF;
+  background-color: var(--color-quaternary);
+  border-color    : var(--color-quaternary-dark);
+}
+
+moloch-settings .custom-theme .input-group-addon {
+  color           : var(--color-foreground);
+  background-color: var(--color-background);
+  border-color    : var(--color-gray);
+}
+
+moloch-settings .custom-theme .dropdown-menu {
+  color           : var(--color-foreground);
+  background-color: var(--color-background);
+  border-color    : var(--color-gray-light);
+}
+
+moloch-settings .custom-theme session-field .field:hover {
+  z-index         : 4;
+  background-color: var(--color-white);
+  border          : 1px solid var(--color-gray-light);
+}
+moloch-settings .custom-theme session-field ul.session-field-dropdown {
+  background-color: var(--color-white);
+  border          : 1px solid var(--color-gray-light);
+}
+moloch-settings .custom-theme session-field ul.session-field-dropdown div > li > a {
+  color: var(--color-foreground);
+}
+moloch-settings .custom-theme session-field ul.session-field-dropdown div > li > a:hover {
+  text-decoration : none;
+  color           : var(--color-black);
+  background-color: var(--color-gray-lighter);
+}
+
+moloch-settings .custom-theme .session-detail-ts {
+  color   : var(--color-foreground-accent);
+  padding : 0 4px;
+}
+moloch-settings .custom-theme .sessionsrc > pre {
+  color: var(--color-src, #CA0404);
+}
+moloch-settings .custom-theme .sessiondst > pre {
+  color: var(--color-dst, #0000FF);
 }
