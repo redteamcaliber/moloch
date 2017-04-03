@@ -576,6 +576,11 @@
                     </div>
                   </div>
                   <div class="col-sm-7">
+                    <div class="margined-top display-inline">
+                      <strong class="small text-theme-accent no-wrap">
+                        Text
+                      </strong>
+                    </div>
                     <div class="pull-right display-sub-navbar-buttons margined-right">
                       <a class="btn btn-sm btn-default btn-theme-tertiary-display">
                         Search
@@ -645,51 +650,69 @@
             <div class="col-md-4">
               <h3 class="margined-top-none margined-bottom-xxxxlg">
                 Custom Theme
+                <span class="fa fa-question-circle pull-right cursor-pointer"
+                  uib-tooltip="Toggle color theme help" tooltip-placement="left"
+                  ng-click="$ctrl.displayHelp = !$ctrl.displayHelp"></span>
               </h3>
               <div class="form-group">
-                <div class="input-group">
+                <div class="input-group input-group-sm">
                   <div class="input-group-addon">
                     Background
                   </div>
                   <input colorpicker ng-model="$ctrl.background"
-                    ng-change="$ctrl.changeColor('--color-background', $ctrl.background)"
+                    ng-change="$ctrl.changeColor()"
                     ng-model-options="{debounce:400}"
                     colorpicker-position="top" type="text" class="form-control">
-                  <div class="input-group-addon"
+                  <div class="input-group-addon cursor-pointer"
+                    colorpicker ng-model="$ctrl.background"
+                    colorpicker-position="top"
+                    ng-change="$ctrl.changeColor()"
+                    ng-model-options="{debounce:400}"
                     style="background-color:{{$ctrl.background}}">
                     &nbsp;&nbsp;&nbsp;
                   </div>
                 </div>
               </div>
               <div class="form-group">
-                <div class="input-group">
+                <div class="input-group input-group-sm">
                   <div class="input-group-addon">
                     Foreground
                   </div>
                   <input colorpicker ng-model="$ctrl.foreground"
-                    ng-change="$ctrl.changeColor('--color-foreground', $ctrl.foreground)"
+                    ng-change="$ctrl.changeColor()"
                     ng-model-options="{debounce:400}"
                     colorpicker-position="top" type="text" class="form-control">
-                  <div class="input-group-addon"
+                  <div class="input-group-addon cursor-pointer"
+                    colorpicker ng-model="$ctrl.foreground"
+                    colorpicker-position="top"
+                    ng-change="$ctrl.changeColor()"
+                    ng-model-options="{debounce:400}"
                     style="background-color:{{$ctrl.foreground}}">
                     &nbsp;&nbsp;&nbsp;
                   </div>
                 </div>
               </div>
               <div class="form-group">
-                <div class="input-group">
+                <div class="input-group input-group-sm">
                   <div class="input-group-addon">
                     Foreground Accent
                   </div>
                   <input colorpicker ng-model="$ctrl.foregroundAccent"
-                    ng-change="$ctrl.changeColor('--color-foreground-accent', $ctrl.foregroundAccent)"
+                    ng-change="$ctrl.changeColor()"
                     ng-model-options="{debounce:400}"
                     colorpicker-position="top" type="text" class="form-control">
-                  <div class="input-group-addon"
+                  <div class="input-group-addon cursor-pointer"
+                    colorpicker ng-model="$ctrl.foregroundAccent"
+                    colorpicker-position="top"
+                    ng-change="$ctrl.changeColor()"
+                    ng-model-options="{debounce:400}"
                     style="background-color:{{$ctrl.foregroundAccent}}">
                     &nbsp;&nbsp;&nbsp;
                   </div>
                 </div>
+                <p class="help-block small" ng-if="$ctrl.displayHelp">
+                  Session values, important text in navbars
+                </p>
               </div>
             </div>
             <div class="col-md-8">
@@ -715,13 +738,18 @@
                     <div class="row">
                       <div class="col-sm-5">
                         <div class="input-group input-group-sm margined-left">
-                              <span class="input-group-addon">
-                                <span class="fa fa-search"></span>
-                              </span>
+                          <span class="input-group-addon">
+                            <span class="fa fa-search"></span>
+                          </span>
                           <input type="text" placeholder="Search" class="form-control" />
                         </div>
                       </div>
                       <div class="col-sm-7">
+                        <div class="margined-top display-inline">
+                          <strong class="small text-theme-accent no-wrap">
+                            Text
+                          </strong>
+                        </div>
                         <div class="pull-right display-sub-navbar-buttons margined-right">
                           <a class="btn btn-sm btn-default btn-theme-tertiary-display">
                             Search
@@ -781,133 +809,199 @@
             </div>
           </div>
 
-          <br>
+          <p class="help-block" ng-if="$ctrl.displayHelp">
+            Main theme colors are lightened/darkened programmatically to
+            provide dark boarders, active buttons, hover colors, etc
+          </p>
 
           <!-- main colors -->
           <div class="row form-group">
             <div class="col-md-3">
-              <div class="input-group">
+              <div class="input-group input-group-sm">
                 <div class="input-group-addon">
                   Primary
                 </div>
                 <input colorpicker ng-model="$ctrl.primary"
-                  ng-change="$ctrl.changeColor('--color-primary', $ctrl.primary)"
+                  ng-change="$ctrl.changeColor('--color-primary', $ctrl.primar)"
                   ng-model-options="{debounce:400}"
                   colorpicker-position="top" type="text" class="form-control">
-                <div class="input-group-addon"
+                <div class="input-group-addon cursor-pointer"
+                  colorpicker ng-model="$ctrl.primary"
+                  colorpicker-position="top"
+                  ng-change="$ctrl.changeColor()"
+                  ng-model-options="{debounce:400}"
                   style="background-color:{{$ctrl.primary}}">
                   &nbsp;&nbsp;&nbsp;
                 </div>
               </div>
+              <p class="help-block small" ng-if="$ctrl.displayHelp">
+                Primary navbar, buttons, active item(s) in lists
+              </p>
             </div>
             <div class="col-md-3">
-              <div class="input-group">
+              <div class="input-group input-group-sm">
                 <div class="input-group-addon">
                   Secondary
                 </div>
                 <input colorpicker ng-model="$ctrl.secondary"
-                  ng-change="$ctrl.changeColor('--color-secondary', $ctrl.secondary)"
+                  ng-change="$ctrl.changeColor()"
                   ng-model-options="{debounce:400}"
                   colorpicker-position="top" type="text" class="form-control">
-                <div class="input-group-addon"
+                <div class="input-group-addon cursor-pointer"
+                  colorpicker ng-model="$ctrl.secondary"
+                  colorpicker-position="top"
+                  ng-change="$ctrl.changeColor()"
+                  ng-model-options="{debounce:400}"
                   style="background-color:{{$ctrl.secondary}}">
                   &nbsp;&nbsp;&nbsp;
                 </div>
               </div>
+              <p class="help-block small" ng-if="$ctrl.displayHelp">
+                Buttons
+              </p>
             </div>
             <div class="col-md-3">
-              <div class="input-group">
+              <div class="input-group input-group-sm">
                 <div class="input-group-addon">
                   Tertiary
                 </div>
                 <input colorpicker ng-model="$ctrl.tertiary"
-                  ng-change="$ctrl.changeColor('--color-tertiary', $ctrl.tertiary)"
+                  ng-change="$ctrl.changeColor()"
                   ng-model-options="{debounce:400}"
                   colorpicker-position="top" type="text" class="form-control">
-                <div class="input-group-addon"
+                <div class="input-group-addon cursor-pointer"
+                  colorpicker ng-model="$ctrl.tertiary"
+                  colorpicker-position="top"
+                  ng-change="$ctrl.changeColor()"
+                  ng-model-options="{debounce:400}"
                   style="background-color:{{$ctrl.tertiary}}">
                   &nbsp;&nbsp;&nbsp;
                 </div>
               </div>
+              <p class="help-block small" ng-if="$ctrl.displayHelp">
+                Action buttons (search, apply, open, etc)
+              </p>
             </div>
             <div class="col-md-3">
-              <div class="input-group">
+              <div class="input-group input-group-sm">
                 <div class="input-group-addon">
                   Quaternary
                 </div>
                 <input colorpicker ng-model="$ctrl.quaternary"
-                  ng-change="$ctrl.changeColor('--color-quaternary', $ctrl.quaternary)"
+                  ng-change="$ctrl.changeColor()"
                   ng-model-options="{debounce:400}"
                   colorpicker-position="top" type="text" class="form-control">
-                <div class="input-group-addon"
+                <div class="input-group-addon cursor-pointer"
+                  colorpicker ng-model="$ctrl.quaternary"
+                  colorpicker-position="top"
+                  ng-change="$ctrl.changeColor()"
+                  ng-model-options="{debounce:400}"
                   style="background-color:{{$ctrl.quaternary}}">
                   &nbsp;&nbsp;&nbsp;
                 </div>
               </div>
+              <p class="help-block small" ng-if="$ctrl.displayHelp">
+                Accent Buttons
+              </p>
             </div>
           </div> <!-- /main colors -->
+
+          <p class="help-block" ng-if="$ctrl.displayHelp">
+            <em>Highlight colors should be similar to their parent color, above.</em>
+            <br>
+            For <strong>light themes</strong>, the highlight color should be lighter than the original.
+            For <strong>dark themes</strong>, the highlight color should be darker than original.
+          </p>
 
           <!-- main color highlights/backgrounds -->
           <div class="row form-group">
             <div class="col-md-3">
-              <div class="input-group">
+              <div class="input-group input-group-sm">
                 <div class="input-group-addon">
                   Highlight
                 </div>
                 <input colorpicker ng-model="$ctrl.primaryLightest"
-                  ng-change="$ctrl.changeColor('--color-primary-lightest', $ctrl.primaryLightest)"
+                  ng-change="$ctrl.changeColor()"
                   ng-model-options="{debounce:400}"
                   colorpicker-position="top" type="text" class="form-control">
-                <div class="input-group-addon"
+                <div class="input-group-addon cursor-pointer"
+                  colorpicker ng-model="$ctrl.primaryLightest"
+                  colorpicker-position="top"
+                  ng-change="$ctrl.changeColor()"
+                  ng-model-options="{debounce:400}"
                   style="background-color:{{$ctrl.primaryLightest}}">
                   &nbsp;&nbsp;&nbsp;
                 </div>
               </div>
+              <p class="help-block small" ng-if="$ctrl.displayHelp">
+                Backgrounds, current page of results
+              </p>
             </div>
             <div class="col-md-3">
-              <div class="input-group">
+              <div class="input-group input-group-sm">
                 <div class="input-group-addon">
                   Highlight
                 </div>
                 <input colorpicker ng-model="$ctrl.secondaryLightest"
-                  ng-change="$ctrl.changeColor('--color-secondary-lightest', $ctrl.secondaryLightest)"
+                  ng-change="$ctrl.changeColor()"
                   ng-model-options="{debounce:400}"
                   colorpicker-position="top" type="text" class="form-control">
-                <div class="input-group-addon"
+                <div class="input-group-addon cursor-pointer"
+                  colorpicker ng-model="$ctrl.secondaryLightest"
+                  colorpicker-position="top"
+                  ng-change="$ctrl.changeColor()"
+                  ng-model-options="{debounce:400}"
                   style="background-color:{{$ctrl.secondaryLightest}}">
                   &nbsp;&nbsp;&nbsp;
                 </div>
               </div>
+              <p class="help-block small" ng-if="$ctrl.displayHelp">
+                Search/Secondary navbar
+              </p>
             </div>
             <div class="col-md-3">
-              <div class="input-group">
+              <div class="input-group input-group-sm">
                 <div class="input-group-addon">
                   Highlight
                 </div>
                 <input colorpicker ng-model="$ctrl.tertiaryLightest"
-                  ng-change="$ctrl.changeColor('--color-tertiary-lightest', $ctrl.tertiaryLightest)"
+                  ng-change="$ctrl.changeColor()"
                   ng-model-options="{debounce:400}"
                   colorpicker-position="top" type="text" class="form-control">
-                <div class="input-group-addon"
+                <div class="input-group-addon cursor-pointer"
+                  colorpicker ng-model="$ctrl.tertiaryLightest"
+                  colorpicker-position="top"
+                  ng-change="$ctrl.changeColor()"
+                  ng-model-options="{debounce:400}"
                   style="background-color:{{$ctrl.tertiaryLightest}}">
                   &nbsp;&nbsp;&nbsp;
                 </div>
               </div>
+              <p class="help-block small" ng-if="$ctrl.displayHelp">
+                Tertiary navbar, table hover
+              </p>
             </div>
             <div class="col-md-3">
-              <div class="input-group">
+              <div class="input-group input-group-sm">
                 <div class="input-group-addon">
                   Highlight
                 </div>
                 <input colorpicker ng-model="$ctrl.quaternaryLightest"
-                  ng-change="$ctrl.changeColor('--color-quaternary-lightest', $ctrl.quaternaryLightest)"
+                  ng-change="$ctrl.changeColor()"
                   ng-model-options="{debounce:400}"
                   colorpicker-position="top" type="text" class="form-control">
-                <div class="input-group-addon"
+                <div class="input-group-addon cursor-pointer"
+                  colorpicker ng-model="$ctrl.quaternaryLightest"
+                  colorpicker-position="top"
+                  ng-change="$ctrl.changeColor()"
+                  ng-model-options="{debounce:400}"
                   style="background-color:{{$ctrl.quaternaryLightest}}">
                   &nbsp;&nbsp;&nbsp;
                 </div>
               </div>
+              <p class="help-block small" ng-if="$ctrl.displayHelp">
+                Session detail background
+              </p>
             </div>
           </div> <!-- /main color highlights/backgrounds -->
 
@@ -916,12 +1010,12 @@
           <div class="row form-group">
             <!-- visualization colors -->
             <div class="col-md-3">
-              <div class="input-group">
+              <div class="input-group input-group-sm">
                 <div class="input-group-addon">
                   Map Water
                 </div>
                 <input colorpicker ng-model="$ctrl.water"
-                  ng-change="$ctrl.changeColor('--color-water', $ctrl.water)"
+                  ng-change="$ctrl.changeColor()"
                   ng-model-options="{debounce:400}"
                   colorpicker-position="top" type="text" class="form-control">
                 <div class="input-group-addon"
@@ -931,12 +1025,12 @@
               </div>
             </div>
             <div class="col-md-3">
-              <div class="input-group">
+              <div class="input-group input-group-sm">
                 <div class="input-group-addon">
                   Map Land
                 </div>
                 <input colorpicker ng-model="$ctrl.land"
-                  ng-change="$ctrl.changeColor('--color-land', $ctrl.land)"
+                  ng-change="$ctrl.changeColor()"
                   ng-model-options="{debounce:400}"
                   colorpicker-position="top" type="text" class="form-control">
                 <div class="input-group-addon"
@@ -947,12 +1041,12 @@
             </div> <!-- /visualization colors -->
             <!-- packet colors -->
             <div class="col-md-3">
-              <div class="input-group">
+              <div class="input-group input-group-sm">
                 <div class="input-group-addon">
                   Src Packets
                 </div>
                 <input colorpicker ng-model="$ctrl.src"
-                  ng-change="$ctrl.changeColor('--color-src', $ctrl.src)"
+                  ng-change="$ctrl.changeColor()"
                   ng-model-options="{debounce:400}"
                   colorpicker-position="top" type="text" class="form-control">
                 <div class="input-group-addon"
@@ -962,12 +1056,12 @@
               </div>
             </div>
             <div class="col-md-3">
-              <div class="input-group">
+              <div class="input-group input-group-sm">
                 <div class="input-group-addon">
                   Dst Packets
                 </div>
                 <input colorpicker ng-model="$ctrl.dst"
-                  ng-change="$ctrl.changeColor('--color-dst', $ctrl.dst)"
+                  ng-change="$ctrl.changeColor()"
                   ng-model-options="{debounce:400}"
                   colorpicker-position="top" type="text" class="form-control">
                 <div class="input-group-addon"
@@ -983,7 +1077,7 @@
           <div class="row">
             <div class="col-md-12">
               <label>Share your theme with others:</label>
-              <div class="input-group">
+              <div class="input-group input-group-sm">
               <input type="text" class="form-control" ng-model="$ctrl.themeString">
                 <span class="input-group-btn">
                   <button class="btn btn-theme-primary" type="button"

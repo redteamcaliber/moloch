@@ -16,8 +16,8 @@
 
     /**
      * Initialize global variables for this controller
-     * @param $window
-     * @param $document
+     * @param $window       Angular's reference to the browser's window object
+     * @param $document     Angular's jQuery wrapper for window.document object
      * @param $interval     Angular's wrapper for window.setInterval
      * @param $location     Exposes browser address bar URL (window.location)
      * @param $routeParams  Retrieves the current set of route parameters

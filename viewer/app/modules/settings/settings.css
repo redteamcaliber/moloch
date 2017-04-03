@@ -95,6 +95,12 @@ moloch-settings .default-theme .navbar-inverse li.active a {
   background-color: #360540 !important;
 }
 
+moloch-settings .default-theme .input-group-addon {
+  color           : #333333;
+  background-color: #EEEEEE;
+  border-color    : #CCCCCC;
+}
+
 moloch-settings .default-theme .display-sub-navbar {
   background-color: #EDFCFF;
 }
@@ -105,6 +111,7 @@ moloch-settings .default-theme .display-sub-navbar ul.dropdown-menu li.active a 
 moloch-settings .default-theme .display-sub-sub-navbar {
   background-color: #FFF7E5;
 }
+moloch-settings .default-theme .display-sub-navbar .text-theme-accent,
 moloch-settings .default-theme .display-sub-sub-navbar session-field .field a.value {
   color: #76207d;
 }
@@ -141,6 +148,12 @@ moloch-settings .blue-theme .navbar-inverse li.active a {
   background-color: #000000 !important;
 }
 
+moloch-settings .blue-theme .input-group-addon {
+  color           : #333333;
+  background-color: #EEEEEE;
+  border-color    : #CCCCCC;
+}
+
 moloch-settings .blue-theme .display-sub-navbar {
   background-color: #DBECE7;
 }
@@ -151,6 +164,7 @@ moloch-settings .blue-theme .display-sub-navbar ul.dropdown-menu li.active a {
 moloch-settings .blue-theme .display-sub-sub-navbar {
   background-color: #FFF7E5;
 }
+moloch-settings .blue-theme .display-sub-navbar .text-theme-accent,
 moloch-settings .blue-theme .display-sub-sub-navbar session-field .field a.value {
   color: #9A4E93;
 }
@@ -187,6 +201,12 @@ moloch-settings .green-theme .navbar-inverse li.active a {
   background-color: #235A32 !important;
 }
 
+moloch-settings .green-theme .input-group-addon {
+  color           : #333333;
+  background-color: #EEEEEE;
+  border-color    : #CCCCCC;
+}
+
 moloch-settings .green-theme .display-sub-navbar {
   background-color: #DBECE7;
 }
@@ -197,6 +217,7 @@ moloch-settings .green-theme .display-sub-navbar ul.dropdown-menu li.active a {
 moloch-settings .green-theme .display-sub-sub-navbar {
   background-color: #FDFFE2;
 }
+moloch-settings .green-theme .display-sub-navbar .text-theme-accent,
 moloch-settings .green-theme .display-sub-sub-navbar session-field .field a.value {
   color: #38738d;
 }
@@ -233,6 +254,12 @@ moloch-settings .cotton-candy-theme .navbar-inverse li.active a {
   background-color: #9B335A !important;
 }
 
+moloch-settings .cotton-candy-theme .input-group-addon {
+  color           : #333333;
+  background-color: #EEEEEE;
+  border-color    : #CCCCCC;
+}
+
 moloch-settings .cotton-candy-theme .display-sub-navbar {
   background-color: #D7F1FF;
 }
@@ -243,6 +270,7 @@ moloch-settings .cotton-candy-theme .display-sub-navbar ul.dropdown-menu li.acti
 moloch-settings .cotton-candy-theme .display-sub-sub-navbar {
   background-color: #FFF8DD;
 }
+moloch-settings .cotton-candy-theme .display-sub-navbar .text-theme-accent,
 moloch-settings .cotton-candy-theme .display-sub-sub-navbar session-field .field a.value {
   color: #9A4E93;
 }
@@ -289,6 +317,7 @@ moloch-settings .dark-2-theme .display-sub-navbar ul.dropdown-menu li.active a {
 moloch-settings .dark-2-theme .display-sub-sub-navbar {
   background-color: #191919;
 }
+moloch-settings .dark-2-theme .display-sub-navbar .text-theme-accent,
 moloch-settings .dark-2-theme .display-sub-sub-navbar session-field .field a.value {
   color: #00CA16;
 }
@@ -365,6 +394,7 @@ moloch-settings .dark-3-theme .display-sub-navbar ul.dropdown-menu li.active a {
 moloch-settings .dark-3-theme .display-sub-sub-navbar {
   background-color: #460C3A;
 }
+moloch-settings .dark-3-theme .display-sub-navbar .text-theme-accent,
 moloch-settings .dark-3-theme .display-sub-sub-navbar session-field .field a.value {
   color: #A6A8E2;
 }
@@ -464,12 +494,6 @@ moloch-settings .custom-theme .display-sub-navbar .btn-theme-quaternary-display 
   color           : #FFFFFF;
   background-color: var(--color-quaternary);
   border-color    : var(--color-quaternary-dark);
-}
-
-moloch-settings .custom-theme .input-group-addon {
-  color           : var(--color-foreground);
-  background-color: var(--color-background);
-  border-color    : var(--color-gray);
 }
 
 moloch-settings .custom-theme .dropdown-menu {
