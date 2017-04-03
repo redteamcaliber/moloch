@@ -665,7 +665,7 @@
                     colorpicker-position="top" type="text" class="form-control">
                   <div class="input-group-addon cursor-pointer"
                     colorpicker ng-model="$ctrl.background"
-                    colorpicker-position="top"
+                    colorpicker-position="left"
                     ng-change="$ctrl.changeColor()"
                     ng-model-options="{debounce:400}"
                     style="background-color:{{$ctrl.background}}">
@@ -684,7 +684,7 @@
                     colorpicker-position="top" type="text" class="form-control">
                   <div class="input-group-addon cursor-pointer"
                     colorpicker ng-model="$ctrl.foreground"
-                    colorpicker-position="top"
+                    colorpicker-position="left"
                     ng-change="$ctrl.changeColor()"
                     ng-model-options="{debounce:400}"
                     style="background-color:{{$ctrl.foreground}}">
@@ -703,7 +703,7 @@
                     colorpicker-position="top" type="text" class="form-control">
                   <div class="input-group-addon cursor-pointer"
                     colorpicker ng-model="$ctrl.foregroundAccent"
-                    colorpicker-position="top"
+                    colorpicker-position="left"
                     ng-change="$ctrl.changeColor()"
                     ng-model-options="{debounce:400}"
                     style="background-color:{{$ctrl.foregroundAccent}}">
@@ -827,7 +827,7 @@
                   colorpicker-position="top" type="text" class="form-control">
                 <div class="input-group-addon cursor-pointer"
                   colorpicker ng-model="$ctrl.primary"
-                  colorpicker-position="top"
+                  colorpicker-position="left"
                   ng-change="$ctrl.changeColor()"
                   ng-model-options="{debounce:400}"
                   style="background-color:{{$ctrl.primary}}">
@@ -849,7 +849,7 @@
                   colorpicker-position="top" type="text" class="form-control">
                 <div class="input-group-addon cursor-pointer"
                   colorpicker ng-model="$ctrl.secondary"
-                  colorpicker-position="top"
+                  colorpicker-position="left"
                   ng-change="$ctrl.changeColor()"
                   ng-model-options="{debounce:400}"
                   style="background-color:{{$ctrl.secondary}}">
@@ -871,7 +871,7 @@
                   colorpicker-position="top" type="text" class="form-control">
                 <div class="input-group-addon cursor-pointer"
                   colorpicker ng-model="$ctrl.tertiary"
-                  colorpicker-position="top"
+                  colorpicker-position="left"
                   ng-change="$ctrl.changeColor()"
                   ng-model-options="{debounce:400}"
                   style="background-color:{{$ctrl.tertiary}}">
@@ -893,7 +893,7 @@
                   colorpicker-position="top" type="text" class="form-control">
                 <div class="input-group-addon cursor-pointer"
                   colorpicker ng-model="$ctrl.quaternary"
-                  colorpicker-position="top"
+                  colorpicker-position="left"
                   ng-change="$ctrl.changeColor()"
                   ng-model-options="{debounce:400}"
                   style="background-color:{{$ctrl.quaternary}}">
@@ -909,8 +909,8 @@
           <p class="help-block" ng-if="$ctrl.displayHelp">
             <em>Highlight colors should be similar to their parent color, above.</em>
             <br>
-            For <strong>light themes</strong>, the highlight color should be lighter than the original.
-            For <strong>dark themes</strong>, the highlight color should be darker than original.
+            For <strong>light themes</strong>, the highlight color should be <strong>lighter</strong> than the original.
+            For <strong>dark themes</strong>, the highlight color should be <strong>darker</strong> than original.
           </p>
 
           <!-- main color highlights/backgrounds -->
@@ -926,7 +926,7 @@
                   colorpicker-position="top" type="text" class="form-control">
                 <div class="input-group-addon cursor-pointer"
                   colorpicker ng-model="$ctrl.primaryLightest"
-                  colorpicker-position="top"
+                  colorpicker-position="left"
                   ng-change="$ctrl.changeColor()"
                   ng-model-options="{debounce:400}"
                   style="background-color:{{$ctrl.primaryLightest}}">
@@ -934,7 +934,7 @@
                 </div>
               </div>
               <p class="help-block small" ng-if="$ctrl.displayHelp">
-                Backgrounds, current page of results
+                Backgrounds
               </p>
             </div>
             <div class="col-md-3">
@@ -948,7 +948,7 @@
                   colorpicker-position="top" type="text" class="form-control">
                 <div class="input-group-addon cursor-pointer"
                   colorpicker ng-model="$ctrl.secondaryLightest"
-                  colorpicker-position="top"
+                  colorpicker-position="left"
                   ng-change="$ctrl.changeColor()"
                   ng-model-options="{debounce:400}"
                   style="background-color:{{$ctrl.secondaryLightest}}">
@@ -970,7 +970,7 @@
                   colorpicker-position="top" type="text" class="form-control">
                 <div class="input-group-addon cursor-pointer"
                   colorpicker ng-model="$ctrl.tertiaryLightest"
-                  colorpicker-position="top"
+                  colorpicker-position="left"
                   ng-change="$ctrl.changeColor()"
                   ng-model-options="{debounce:400}"
                   style="background-color:{{$ctrl.tertiaryLightest}}">
@@ -992,7 +992,7 @@
                   colorpicker-position="top" type="text" class="form-control">
                 <div class="input-group-addon cursor-pointer"
                   colorpicker ng-model="$ctrl.quaternaryLightest"
-                  colorpicker-position="top"
+                  colorpicker-position="left"
                   ng-change="$ctrl.changeColor()"
                   ng-model-options="{debounce:400}"
                   style="background-color:{{$ctrl.quaternaryLightest}}">
@@ -1018,7 +1018,11 @@
                   ng-change="$ctrl.changeColor()"
                   ng-model-options="{debounce:400}"
                   colorpicker-position="top" type="text" class="form-control">
-                <div class="input-group-addon"
+                <div class="input-group-addon cursor-pointer"
+                  colorpicker ng-model="$ctrl.water"
+                  colorpicker-position="left"
+                  ng-change="$ctrl.changeColor()"
+                  ng-model-options="{debounce:400}"
                   style="background-color:{{$ctrl.water}}">
                   &nbsp;&nbsp;&nbsp;
                 </div>
@@ -1033,7 +1037,11 @@
                   ng-change="$ctrl.changeColor()"
                   ng-model-options="{debounce:400}"
                   colorpicker-position="top" type="text" class="form-control">
-                <div class="input-group-addon"
+                <div class="input-group-addon cursor-pointer"
+                  colorpicker ng-model="$ctrl.land"
+                  colorpicker-position="left"
+                  ng-change="$ctrl.changeColor()"
+                  ng-model-options="{debounce:400}"
                   style="background-color:{{$ctrl.land}}">
                   &nbsp;&nbsp;&nbsp;
                 </div>
@@ -1049,7 +1057,11 @@
                   ng-change="$ctrl.changeColor()"
                   ng-model-options="{debounce:400}"
                   colorpicker-position="top" type="text" class="form-control">
-                <div class="input-group-addon"
+                <div class="input-group-addon cursor-pointer"
+                  colorpicker ng-model="$ctrl.src"
+                  colorpicker-position="left"
+                  ng-change="$ctrl.changeColor()"
+                  ng-model-options="{debounce:400}"
                   style="background-color:{{$ctrl.src}}">
                   &nbsp;&nbsp;&nbsp;
                 </div>
@@ -1064,7 +1076,11 @@
                   ng-change="$ctrl.changeColor()"
                   ng-model-options="{debounce:400}"
                   colorpicker-position="top" type="text" class="form-control">
-                <div class="input-group-addon"
+                <div class="input-group-addon cursor-pointer"
+                  colorpicker ng-model="$ctrl.dst"
+                  colorpicker-position="left"
+                  ng-change="$ctrl.changeColor()"
+                  ng-model-options="{debounce:400}"
                   style="background-color:{{$ctrl.dst}}">
                   &nbsp;&nbsp;&nbsp;
                 </div>

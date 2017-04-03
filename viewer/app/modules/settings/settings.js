@@ -529,7 +529,7 @@
     setTheme() {
       // default to default theme if the user has not set a theme
       if (!this.settings.theme) { this.settings.theme = 'default-theme'; }
-      if (this.settings.theme.startsWith('#')) {
+      if (this.settings.theme.startsWith('custom')) {
         this.settings.theme = 'custom-theme';
         this.creatingCustom = true;
       }
@@ -552,7 +552,7 @@
 
       this.setThemeString();
 
-      this.settings.theme = this.themeString;
+      this.settings.theme = `custom1:${this.themeString}`;
 
       this.update(true);
     }
@@ -587,7 +587,8 @@
     }
 
     updateThemeString() {
-      let colors = this.themeString.split(',');
+      let theme = this.themeString.split(':')[1];
+      let colors = theme.split(',');
 
       this.background = colors[0];
       this.foreground = colors[1];

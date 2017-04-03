@@ -893,7 +893,7 @@ app.get(['/sessions', '/help', '/settings', '/files', '/stats', '/spiview', '/sp
   );
 
   var theme = req.user.settings.theme || 'default-theme';
-  if (theme.startsWith('#')) { theme  = 'custom-theme'; }
+  if (theme.startsWith('custom1')) { theme  = 'custom-theme'; }
 
   res.render('app.pug', { theme:theme });
 });
@@ -911,7 +911,7 @@ app.get(['/users'], checkWebEnabled, function(req, res) {
   );
 
   var theme = req.user.settings.theme || 'default-theme';
-  if (theme.startsWith('#')) { theme = 'custom-theme'; }
+  if (theme.startsWith('custom1')) { theme = 'custom-theme'; }
 
   res.render('app.pug', { theme:theme });
 });
@@ -942,7 +942,7 @@ app.get('/user.css', function(req, res) {
 
     var style = stylus(str);
 
-    var colors = req.user.settings.theme.split(',');
+    var colors = req.user.settings.theme.split(':')[1].split(',');
 
     style.define('colorBackground', new stylus.nodes.Literal(colors[0]));
     style.define('colorForeground', new stylus.nodes.Literal(colors[1]));
