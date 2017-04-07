@@ -308,10 +308,22 @@
     keydown(event) {
       let target;
 
-      // if there are no results, we only care about escape and enter presses
+      // always check for escape before anything else
+      if (event.keyCode === 27) {
+        // if there's a request in progress, cancel it
+        if (this.promise) { this.cancelPromise(); }
+
+        this.loadingValues = false;
+        this.loadingError  = false;
+        this.results       = null;
+        this.activeIdx     = -1;
+
+        return;
+      }
+
+      // if there are no results, just check for enter click to remove typeahead
       if (!this.results || this.results.length === 0) {
-        if (event.keyCode === 27 || event.keyCode === 13) {
-          // if there's a request in progress, cancel it
+        if (event.keyCode == 13) {
           if (this.promise) { this.cancelPromise(); }
 
           this.loadingValues = false;
