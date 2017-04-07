@@ -323,7 +323,7 @@
 
       // if there are no results, just check for enter click to remove typeahead
       if (!this.results || this.results.length === 0) {
-        if (event.keyCode == 13) {
+        if (event.keyCode === 13) {
           if (this.promise) { this.cancelPromise(); }
 
           this.loadingValues = false;
