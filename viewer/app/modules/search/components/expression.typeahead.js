@@ -215,10 +215,12 @@
            });
 
            this.promise.then((result) => {
-             this.promise       = null;
-             this.loadingValues = false;
-             this.results       = result;
-             this.addExistsItem(lastToken, operatorToken);
+             this.promise         = null;
+             if (result) {
+               this.loadingValues = false;
+               this.results       = result;
+               this.addExistsItem(lastToken, operatorToken);
+             }
            }).catch((error) => {
              this.promise       = null;
              this.loadingValues = false;
@@ -258,9 +260,11 @@
 
          this.promise.then((result) => {
            this.promise       = null;
-           this.loadingValues = false;
-           this.results       = result;
-           this.addExistsItem(lastToken, operatorToken);
+           if (result) {
+             this.loadingValues = false;
+             this.results = result;
+             this.addExistsItem(lastToken, operatorToken);
+           }
          }).catch((error) => {
            this.promise       = null;
            this.loadingValues = false;
@@ -307,12 +311,13 @@
       // if there are no results, we only care about escape and enter presses
       if (!this.results || this.results.length === 0) {
         if (event.keyCode === 27 || event.keyCode === 13) {
+          // if there's a request in progress, cancel it
+          if (this.promise) { this.cancelPromise(); }
+
+          this.loadingValues = false;
           this.loadingError  = false;
           this.results       = null;
           this.activeIdx     = -1;
-
-          // if there's a request in progress, cancel it
-          if (this.promise) { this.cancelPromise(); }
         }
 
         return;
