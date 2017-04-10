@@ -1,3 +1,4 @@
+/* panels -------------------------- */
 moloch-spiview .panel-heading {
   padding         : 0;
   background-color: var(--color-gray-light) !important;
@@ -81,6 +82,17 @@ moloch-spiview .panel-body .spi-bucket {
 moloch-spiview .panel-body .spi-bucket sup {
   margin-left: -10px;
 }
+
+
+/* loading alert ------------------- */
+moloch-spiview .alert {
+  margin-bottom: 0;
+}
+
+moloch-spiview .alert .btn {
+  margin-top: -4px;
+}
+
 
 /* https://github.com/angular/angular.js/issues/8224 */
 moloch-spiview .fa-spin.ng-animate {
