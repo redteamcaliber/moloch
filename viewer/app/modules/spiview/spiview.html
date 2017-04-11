@@ -3,15 +3,38 @@
   <moloch-search num-matching-sessions="$ctrl.filtered"
     timezone="$ctrl.settings.timezone"></moloch-search>
 
+  <form class="loading-nav" ng-if="$ctrl.dataLoading">
+    <div class="form-inline" ng-if="$ctrl.dataLoading">
+      <span class="fa fa-spinner fa-lg fa-spin"></span>&nbsp;
+      <em>Loading SPI data</em>
+      <a class="btn btn-warning btn-sm pull-right"
+        ng-click="$ctrl.cancelLoading()">
+        <span class="fa fa-ban"></span>&nbsp;
+        cancel
+      </a>
+    </div>
+  </form>
+  <form class="loading-nav" ng-if="$ctrl.staleData && !$ctrl.dataLoading">
+    <div class="form-inline text-theme-accent">
+      <span class="fa fa-exclamation-triangle"></span>&nbsp;
+      <strong>Warning:</strong> much of the data below does not match your query
+      because the request was canceled.
+      <em>Click search to reissue your query.</em>
+      <span class="fa fa-close pull-right cursor-pointer"
+        ng-click="$ctrl.staleData = false"></span>
+    </div>
+  </form>
+
   <!-- graph/map visualizations -->
-  <div class="row margin-for-search-navbar">
+  <div class="row margin-for-search-navbar" ng-class="{'extra-margin':$ctrl.dataLoading || $ctrl.staleData}">
     <moloch-graph-map ng-if="::($ctrl.mapData && $ctrl.graphData)"
       graph-data="$ctrl.graphData" map-data="$ctrl.mapData" primary="true">
     </moloch-graph-map>
-    <div class="col-md-12 margined-top-xxxxlg margined-bottom-xxxxlg margined-left text-center text-theme-accent"
+    <div class="col-md-12 margined-top-xxxxlg margined-bottom-xxxxlg text-center text-theme-accent"
       ng-if="!$ctrl.loadingVisualizations && !$ctrl.mapData && !$ctrl.graphData">
       <span class="fa fa-exclamation-triangle"></span>&nbsp;
-      No data to render visualizations.
+      No data to render visualizations
+      <span ng-if="$ctrl.canceled">(request was canceled)</span>
     </div>
   </div>
 
@@ -19,20 +42,6 @@
     Showing {{$ctrl.filtered | number}} entries filtered from
     {{$ctrl.total | number}} total entries
   </label>
-
-  <div class="row margined-top-lg" ng-if="$ctrl.serialLoading">
-    <div class="col-md-12">
-      <div class="alert alert-info">
-        <span class="fa fa-spinner fa-lg fa-spin"></span>&nbsp;
-        <em>Loading SPI data</em>
-        <a class="btn btn-warning btn-sm pull-right"
-          ng-click="$ctrl.cancelLoading()">
-          <span class="fa fa-ban"></span>&nbsp;
-          cancel
-        </a>
-      </div>
-    </div>
-  </div>
 
   <error ng-if="$ctrl.error" message="::$ctrl.error"></error>
 
@@ -178,6 +187,7 @@
               <i class="small"
                 ng-if="!value.loading && !value.error && !value.value.buckets.length">
                 No data for this field
+                <span ng-if="$ctrl.canceled && !value.value">(request was canceled)</span>
               </i>
 
               <!-- spiview field more/less values -->

@@ -90,7 +90,15 @@
         if (!initialized) { initialized = true; return; }
 
         newQuery = true;
-        this.getSpiData(this.query.spi);
+
+        if (pendingPromise) {   // if there's already a req (or series of reqs)
+          this.cancelLoading(); // cancel any current requests
+          this.$timeout(() => { // wait for promise abort to complete
+            this.getSpiData(this.query.spi);
+          }, 100);
+        } else {
+          this.getSpiData(this.query.spi);
+        }
       });
 
       // watch for additions to search parameters from spi values
@@ -260,8 +268,10 @@
       // reset loading counts for categories
       categoryLoadingCounts = {};
 
+      this.dataLoading = true;
+      this.staleData = false;
+      this.canceled = false;
       this.error = false;
-      this.serialLoading = true;
 
       let spiParamsArray = spiQuery.split(',');
 
@@ -293,10 +303,10 @@
 
           let spiData = category.spi[field.dbField];
 
-          field.active = true;
-          spiData.active = true;
+          field.active    = true;
+          spiData.active  = true;
           spiData.loading = true;
-          spiData.error = false;
+          spiData.error   = false;
 
           tasks.push(this.createTask(field, count));
         }
@@ -308,11 +318,11 @@
       SpiviewController.serial(tasks)
         .then((response) => { // returns the last result in the series
           if (response && response.bsqErr) { this.error = response.bsqErr; }
-          this.serialLoading = false;
+          this.dataLoading = false;
         })
         .catch((error) => {
           this.error = error;
-          this.serialLoading = false;
+          this.dataLoading = false;
         });
     }
 
@@ -322,10 +332,13 @@
      * @param {int} count     The amount of spi data to query for
      */
     getSingleSpiData(field, count) {
-      if (!count) { count = 100; } // default amount of spi data to retrieve
-
       let category  = SpiviewController.setupCategory(this.categoryObjects, field);
       let spiData   = category.spi[field.dbField];
+
+      // don't continue if the active flag is defined and false
+      if (spiData.active !== undefined && !spiData.active) { return; }
+
+      if (!count) { count = 100; } // default amount of spi data to retrieve
 
       spiData.active  = true;
       spiData.loading = true;
@@ -351,9 +364,9 @@
           if (response.bsqErr) { spiData.error = response.bsqErr; }
 
           // only update the requested spi data
-          spiData.loading = false;
-          spiData.value   = response.spi[field.dbField];
-          spiData.count   = count;
+          spiData.loading     = false;
+          spiData.value       = response.spi[field.dbField];
+          spiData.count       = count;
 
           if (newQuery) { // this data comes back with every request
             // we should show it in the view ASAP (on first request)
@@ -373,8 +386,8 @@
           SpiviewController.countCategoryFieldsLoading(category, false);
 
           // display error for the requested spi data
-          spiData.loading = false;
-          spiData.error   = error.text;
+          spiData.loading     = false;
+          spiData.error       = error.text;
 
           this.loadingVisualizations = false;
         });
@@ -456,9 +469,12 @@
 
       let addToQuery = false, spiQuery = '';
 
-      if (spiData) { // spi data exists, so we only need to toggle active state
+      if (spiData) { // spi data exists, so we need to toggle active state
         spiData.active  = !spiData.active;
         addToQuery      = spiData.active;
+        // if spiData was not populated with a value and it's now active
+        // we need to show get the spi data from the server
+        if (!spiData.value && spiData.active) { this.getSingleSpiData(field); }
       } else { // spi data doesn't exist, so fetch it
         addToQuery = true;
         if (issueQuery) { this.getSingleSpiData(field); }
@@ -600,10 +616,18 @@
     /* Cancels the loading of all server requests */
     cancelLoading() {
       pendingPromise.abort(); // cancel current server request
+      pendingPromise  = null; // reset
 
       this.canceled = true;   // indicate cancellation for future requests
 
-      this.serialLoading = false;
+      this.dataLoading = false;
+
+      if (newQuery) {
+        this.staleData = true;
+        console.log('stale data');
+      } else {
+        this.staleData = false;
+      }
 
       // set loading to false for all categories and fields
       for (let key in this.categoryObjects) {
