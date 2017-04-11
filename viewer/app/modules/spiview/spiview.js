@@ -622,12 +622,7 @@
 
       this.dataLoading = false;
 
-      if (newQuery) {
-        this.staleData = true;
-        console.log('stale data');
-      } else {
-        this.staleData = false;
-      }
+      this.staleData = newQuery;
 
       // set loading to false for all categories and fields
       for (let key in this.categoryObjects) {

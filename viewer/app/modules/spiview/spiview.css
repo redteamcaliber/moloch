@@ -13,11 +13,6 @@ moloch-spiview form.loading-nav {
           box-shadow: var(--px-none) var(--px-none) var(--px-xlg) var(--px-sm) #333;
 }
 
-/* extra margin for loading navbar */
-moloch-spiview .extra-margin {
-  margin-top: 130px;
-}
-
 
 /* panels -------------------------- */
 moloch-spiview .panel-heading {
