@@ -57,3 +57,6 @@ require('./connections/connections.linkpopup.component');
 require('./visualization/components/graph.map');
 require('./visualization/components/graph');
 require('./visualization/components/map');
+
+require('./upload/upload');
+require('./upload/upload.service');

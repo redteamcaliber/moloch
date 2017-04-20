@@ -99,6 +99,11 @@
           title    : 'SPIGraph',
           template : '<moloch-spigraph></moloch-spigraph>',
           reloadOnSearch: false
+        })
+        .when('/upload', {
+          title    : 'Upload',
+          template : '<moloch-upload></moloch-upload>',
+          reloadOnSearch: false
         });
 
       $locationProvider.html5Mode(true); // activate HTML5 Mode
