@@ -3460,10 +3460,16 @@ function csvListWriter(req, res, list, fields, pcapWriter, extension) {
         value = Pcap.inet_ntoa(value);
       }
 
-      values.push(value || '');
+      if (Array.isArray(value)) {
+        let singleValue = '"' + value.join(', ') +  '"';
+        values.push(singleValue);
+      } else {
+        if (value === undefined) { value = ''; }
+        values.push(value);
+      }
     }
 
-    res.write(values.join(', '));
+    res.write(values.join(','));
     res.write('\r\n');
   }
 
