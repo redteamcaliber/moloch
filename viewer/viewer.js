@@ -1671,8 +1671,28 @@ app.post('/user/columns/delete', checkCookieToken, function(req, res) {
 });
 
 app.get('/decodings', function(req, res) {
-  var decodings = decode.settings();
-  res.send(decodings);
+  var settings = decode.settings();
+  var decodeItems = {};
+  for (var key in settings) {
+    var setting = settings[key];
+    var obj = {name: setting.name || key};
+    if (setting.title || setting.fields) {
+      obj.fields = {};
+      if (setting.title) {
+        obj.fields.title = {name: setting.title, disabled: true};
+      }
+      obj.fields[key + ":enabled"] = {name: "Enable", type: "checkbox", disabled:true};
+      setting.fields.forEach(function(field) {
+        obj.fields[key + ":" + field.key] = {name: field.name || field.key, type: field.type};
+      });
+      decodeItems[key] = obj;
+    } else {
+      obj.type = "checkbox";
+      decodeItems[key+":enabled"] = obj;
+    }
+  }
+
+  res.send(JSON.stringify(decodeItems));
 });
 
 

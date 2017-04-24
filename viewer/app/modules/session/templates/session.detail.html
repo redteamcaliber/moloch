@@ -92,7 +92,8 @@
       </button>
     </fieldset>
     <div class="well well-sm margined-top" ng-if="$ctrl.decodingForm">
-      <span ng-repeat="field in $ctrl.decodings[$ctrl.decodingForm].fields">
+      <span ng-repeat="field in $ctrl.decodings[$ctrl.decodingForm].fields"
+        ng-if="!field.disabled">
         <div class="form-group">
           <div class="input-group input-group-sm">
             <span class="input-group-addon">
