@@ -84,12 +84,16 @@
         Show Timestamps
       </button>
       <!-- other decodings -->
-      <button ng-repeat="(key, value) in $ctrl.decodings"
-        type="button" class="btn btn-default btn-sm margined-right"
-        ng-class="{'active':params.decode[key]}"
-        ng-click="$ctrl.toggleDecoding(key)">
-        {{::value.name}}
-      </button>
+      <div class="btn-group" role="group">
+        <button ng-repeat="(key, value) in $ctrl.decodings"
+          type="button" class="btn btn-default btn-sm"
+          uib-tooltip="{{::value.name}} Decoding"
+          tooltip-append-to-body="true"
+          ng-class="{'active':params.decode[key]}"
+          ng-click="$ctrl.toggleDecoding(key)">
+          {{::value.name}}
+        </button>
+      </div>
     </fieldset>
     <div class="well well-sm margined-top" ng-if="$ctrl.decodingForm">
       <span ng-repeat="field in $ctrl.decodings[$ctrl.decodingForm].fields"
@@ -117,7 +121,9 @@
           <span class="fa fa-check"></span>
         </button>
       </div>
-    </div>
+      <span class="help-block">
+        {{$ctrl.decodings[$ctrl.decodingForm].title}}
+      </span>
     </div>
   </form>
 </div> <!-- /packet options -->
